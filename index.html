@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equity="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Glass Effect</title>
+    <!-- https://fonts.google.com/share?selection.family=Open+Sans:wght@400;600|Tektur:wght@600|Victor+Mono:wght@300;400 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Tektur:wght@600&family=Victor+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+        
+</head>
+
+<body>  
+
+    <div id ="bodyDiv">
+        <div class="glassCanvasContainer">
+            <div id ="fullScreenInfo">To return, press space or double click</div>
+            <div class="hiddenCanvasDiv" id="hiddenCanvasDiv"><canvas id="hiddenCanvas"></canvas></div>
+            <div class="glass">
+
+                <button id="hideBtn"> <img src ="/SVGs/close_Button.svg" alt ="Close" ></button>
+
+                <button id="fullscreenBtn"><img src ="/SVGs/fullScreen_Arrows.svg" alt ="Fullscreen" ></button>
+
+                    <h1 id="glassTitle">Matrix Generator</h1>
+                    <h3 id="glassSubTitle">Welcome to the future.</h3>
+                    <div id="mainContentDiv">
+                        <!-- <p id="glassParagraph" style ="font-family: 'Open Sans', sans-serif;font-weight:600;">Select your theme:</p> -->
+
+                        
+                        <legend id="legendTitle">Classics:</legend>
+
+                        <div id="themeFieldSet">
+
+                            <div id="buttonRow" style ="display: flex;justify-content: space-between;">
+
+                                <button style = "color:black;" id="btnMovieGreen">Movie<br>Green</button>
+                                <button id="btnBlueMachine">Blue<br>Machine</button>
+                                <button id="btnRedVibes">Red<br>Vibes</button>
+                                <button id="btnPurpleRain">Purple<br>Rain</button>
+                                <button style = "color:black;" id="btnWhiteLightning">White<br>Lightning</button>
+
+                            </div>
+                        </div>
+
+                        
+                        <legend id="legendTitle" style ="margin-top: 10px;">Speciality:</legend>
+                        <div id="themeFieldSet">
+                            
+                            <div id="buttonRow" style ="display: flex;justify-content: space-between;">
+                                
+                                <button id="btnPurpleThunder">Purple<br>Thunder</button>
+                                <button class="btnCheckerBoard">Checkered</button>
+                                <button id="btnCozyFire">Cozy Fire</button>
+                                <button id="btnChess">Chess</button>
+                            </div>
+
+                        </div>
+
+                        <div style ="border: 1px solid white; margin-top: 15px;margin-bottom: 15px;"></div>
+                        <div id="infoLine">
+                            <p>Built By: Jovan Qeleshi</p>
+                            <a id="gitHubLink" href="https://github.com">GitHub</a>
+                        </div>
+                        <p id="infoLine">Comming Soon: Customization!</p>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <canvas id ='canvas1'></canvas>
+    <script src="script.js">
+    </script>
+    
+</body>
