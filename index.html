@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equity="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Glass Effect</title>
+    <title>Matrix Generator</title>
     <!-- https://fonts.google.com/share?selection.family=Open+Sans:wght@400;600|Tektur:wght@600|Victor+Mono:wght@300;400 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,9 +25,35 @@
             <div class="hiddenCanvasDiv" id="hiddenCanvasDiv"><canvas id="hiddenCanvas"></canvas></div>
             <div class="glass">
 
-                <button id="hideBtn"> <img src ="/SVGs/close_Button.svg" alt ="Close" ></button>
+                <button id="hideBtn">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 800 800" style="enable-background:new 0 0 800 800;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill-rule:evenodd;clip-rule:evenodd;}
+                        </style>
+                        <path id="路径_00000037655974373357019910000002536693140533985935_" class="st0" d="M400,452.1l208.6,208.6
+                            c14.4,14.4,37.7,14.4,52.1,0c14.4-14.4,14.4-37.7,0-52.2L452.1,400l208.6-208.6c14.4-14.4,14.4-37.7,0-52.1
+                            c-14.4-14.4-37.7-14.4-52.1,0L400,347.9L191.4,139.3c-14.4-14.4-37.7-14.4-52.1,0c-14.4,14.4-14.4,37.7,0,52.1L347.9,400
+                            L139.3,608.6c-14.4,14.4-14.4,37.7,0,52.1c14.4,14.4,37.7,14.4,52.1,0L400,452.1z"/>
+                    </svg>
+                </button>
 
-                <button id="fullscreenBtn"><img src ="/SVGs/fullScreen_Arrows.svg" alt ="Fullscreen" ></button>
+                <button id="fullscreenBtn">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                        viewBox="0 0 800 800" style="enable-background:new 0 0 800 800;" xml:space="preserve">
+                        <style type="text/css">
+                            .st0{fill-rule:evenodd;clip-rule:evenodd;}
+                        </style>
+                        <path class="st0" d="M100,133.3c0-18.4,14.9-33.3,33.3-33.3h133.3c18.4,0,33.3,14.9,33.3,33.3s-14.9,33.3-33.3,33.3h-52.9
+                            l109.8,109.8c13,13,13,34.1,0,47.1c-13,13-34.1,13-47.1,0L166.7,213.8v52.9c0,18.4-14.9,33.3-33.3,33.3S100,285.1,100,266.7V133.3z
+                            M533.3,100h133.3c18.4,0,33.3,14.9,33.3,33.3v133.3c0,18.4-14.9,33.3-33.3,33.3s-33.3-14.9-33.3-33.3v-52.9L523.6,323.6
+                            c-13,13-34.1,13-47.1,0c-13-13-13-34.1,0-47.1l109.8-109.8h-52.9c-18.4,0-33.3-14.9-33.3-33.3S514.9,100,533.3,100z M323.6,476.4
+                            c13,13,13,34.1,0,47.1L213.8,633.3h52.9c18.4,0,33.3,14.9,33.3,33.3S285.1,700,266.7,700H133.3c-18.4,0-33.3-14.9-33.3-33.3V533.3
+                            c0-18.4,14.9-33.3,33.3-33.3s33.3,14.9,33.3,33.3v52.9l109.8-109.8C289.4,463.4,310.6,463.4,323.6,476.4z M476.4,476.4
+                            c13-13,34.1-13,47.1,0l109.8,109.8v-52.9c0-18.4,14.9-33.3,33.3-33.3s33.3,14.9,33.3,33.3v133.3c0,18.4-14.9,33.3-33.3,33.3H533.3
+                            c-18.4,0-33.3-14.9-33.3-33.3s14.9-33.3,33.3-33.3h52.9L476.4,523.6C463.4,510.6,463.4,489.4,476.4,476.4z"/>
+                    </svg>
+                </button>
 
                     <h1 id="glassTitle">Matrix Generator</h1>
                     <h3 id="glassSubTitle">Welcome to the future.</h3>
@@ -65,11 +91,21 @@
                         </div>
 
                         <div style ="border: 1px solid white; margin-top: 15px;margin-bottom: 15px;"></div>
+
                         <div id="infoLine">
                             <p>Built By: Jovan Qeleshi</p>
-                            <a id="gitHubLink" href="https://github.com">GitHub</a>
+                            <div id = "linkBox">
+                                <a id="gitHubLink" href="https://github.com/Starvingg/MatrixGenerator" target="_blank">GitHub</a>
+                            </div>
                         </div>
-                        <p id="infoLine">Comming Soon: Customization!</p>
+
+                        <div id="infoLine">
+                            <p>Comming Soon: Customization!</p>
+                            <div id = "linkBox">
+                                <a id="gitHubLink" href="https://github.com/Starvingg/MatrixGenerator" target="_blank">Report a Bug</a>
+                            </div>
+                        </div>
+
                     </div>
 
             </div>

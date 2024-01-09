@@ -572,13 +572,22 @@ body{
 
 #infoLine{
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Add this line */
     justify-content:space-between;
     color:white;
     font-size: 17px;
     font-family: 'Victor Mono', monospace;
     font-weight:800;
+    margin-top: 10px;
 }
+
+#linkBox{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+
 
 #infoLine p, #infoLine a {
     margin: 0;
