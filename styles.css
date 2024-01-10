@@ -43,6 +43,7 @@ body{
 .glassCanvasContainer {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 #fullscreenBtn, #hideBtn {
@@ -62,11 +63,15 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-#fullscreenBtn img, #hideBtn img {
+#fullscreenBtn svg, #hideBtn svg {
     height: 30px;
+    color: black;
 }
+
 
 
 #fullscreenBtn:hover, #hideBtn:hover {
@@ -122,18 +127,19 @@ body{
     padding: 30px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Add a more pronounced shadow */
     border: 1px solid rgba(255, 255, 255, 0.282); /* Add a subtle border */
-    margin: 3vw;
+    transform: translateY(3vw);
     width: 50vw;
     max-width: 850px;
     z-index: 0;
     display: block;
+
 }
 
 .hiddenCanvasDiv { /* This is the div holding the canvas */
     position: absolute;
     border-radius: 10px;
     padding: 30px;
-    margin: 3vw;
+    transform: translateY(3vw);
     width: 50vw;
     max-width: 850px;
     z-index: -1;

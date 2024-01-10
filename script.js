@@ -61,7 +61,7 @@ class Symbol{ // Manages individual symbols
         } else {
             this.y += 1;
         }
-        console.log("solidColor: OK")
+        //console.log("solidColor: OK")
 
         }
         else if (this.style === 'purpleThunder'){
@@ -306,16 +306,16 @@ class Effect{ // Main wrapper, we use this to create, update, and draw all symbo
         this.columns = this.canvasWidth/this.fontSize;
         this.symbols = [];
 
-        console.log(this.symbols);
+        // console.log(this.symbols);
 
         this.color = color;
         this.style = style;
 
         if(this.style === 'cozyFre'){
-            console.log('cozyFire Starter');
+            // console.log('cozyFire Starter');
             this.#fireStarter();
         } else {
-            console.log('Initializer');
+            // console.log('Initializer');
             this.#initialize();
         }
 
@@ -432,24 +432,58 @@ window.addEventListener('resize',function(){
 
     if(cozyFireOn){
         matrixEffect.resizeFire(canvas.width,canvas.height);
-        console.log("CozyFireON");
+        // console.log("CozyFireON");
     } else {
         matrixEffect.resize(canvas.width,canvas.height);
     }
 });
 
-
+// ---------------------------
 // FRONT END STUFF STARTS HERE
+// ---------------------------
 
-// This starts the initial effect
-startEffect('rgb(255, 0, 0)','solidColor');// Movie Green
+// This randomly selects an initial effect to start
+
+const effectsToStart = [
+    function() {
+        startEffect('rgb(10, 251, 14)','solidColor'); // Movie Green
+    },
+    function() {
+        startEffect('rgb(0,140,255)','solidColor'); // Blue Machine
+    },
+    function() {
+        startEffect('rgb(255, 0, 0)','solidColor'); // Red Vibes
+    },
+    function() {
+        startEffect('magenta','solidColor'); // Purple Rain
+    },
+    function(){
+        startEffect('rgb(255, 255, 255)','solidColor'); // White Lightnight
+    },
+    function(){
+        startEffect('red','purpleThunder'); // Purple Thunder
+    },
+    function(){
+        startEffect('red','checkered');
+    },
+    function(){
+        startEffect('red','cozyFire');
+    },
+    function(){
+        startEffect('red','chess');
+    }
+];
+
+const randomEffectIndex = Math.floor(Math.random() * effectsToStart.length);
+effectsToStart[randomEffectIndex]();
 
 
 
 
 // Mouse Clicks for buttons start different Matrix Effect
 
-// Classic Effects
+// Classic Effects Buttons
+
 document.getElementById('btnMovieGreen').addEventListener('click', function() {
     startEffect('rgb(10, 251, 14)','solidColor');
 });
@@ -471,7 +505,7 @@ document.getElementById('btnWhiteLightning').addEventListener('click', function(
 });
 
 
-// Speciality Effects
+// Speciality Effects Buttons
 
 document.getElementById('btnPurpleThunder').addEventListener('click', function() {
     startEffect('red','purpleThunder');
@@ -745,6 +779,9 @@ fullScreenButton.addEventListener('click', function() {
     }
 });
 
+
+// Below makes the "How to get back card, slowly fade out"
+
 let fullScreenTimeout;
 
 hideButton.addEventListener('click', function(){
@@ -759,14 +796,16 @@ hideButton.addEventListener('click', function(){
             if (op <= 0.2){
                 clearInterval(timer);
                 fullScreenInfo.style.display = 'none';
+                fullScreenInfo.style.opacity = 1; // Set opacity back to 100%
             }
             fullScreenInfo.style.opacity = op;
             fullScreenInfo.style.filter = 'alpha(opacity=' + op * 100 + ")";
             op -= op * 0.05;
         }, 30);
         fullScreenTimeout = null;
-    }, 2000); // Delay the start of the fade out by 2 second
-
+        fullScreenInfo.style.opacity = 1; // Set opacity back to 100%
+    }, 2000); // Delay the start of the fade out by 2 seconds
+    fullScreenInfo.style.opacity = 1; 
 });
 
 
@@ -797,23 +836,11 @@ window.onload = function() {
     const hiddenCanvasDiv = document.getElementById('hiddenCanvasDiv');
 
     hiddenCanvasDiv.style.height = getComputedStyle(glassDiv).height;
-
+    
     window.addEventListener('resize', () => {
-        // Update the height on window resize
         hiddenCanvasDiv.style.height = getComputedStyle(glassDiv).height;
     });
 };
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -835,6 +862,7 @@ const cvs = secondCanvas.getContext('2d');
 
 secondCanvas.width = document.getElementById('hiddenCanvas').offsetWidth;
 secondCanvas.height = document.getElementById('hiddenCanvas').offsetHeight;
+
 // secondCanvas.height = divHeight;
 
 class Symbol2{ // Manages individual symbols
@@ -878,7 +906,7 @@ class Symbol2{ // Manages individual symbols
         } else {
             this.y += 1;
         }
-        console.log("solidColor: OK")
+        // console.log("solidColor: OK")
 
         }
         else if (this.style === 'purpleThunder'){
@@ -1125,16 +1153,16 @@ constructor(secondCanvasWidth, secondCanvasHeight, color, style){
     this.columns = this.secondCanvasWidth/this.fontSize;
     this.symbols = [];
 
-    console.log(this.symbols);
+    // console.log(this.symbols);
 
     this.color = color;
     this.style = style;
 
     if(this.style === 'cozyFre'){
-        console.log('cozyFire Starter');
+        // console.log('cozyFire Starter');
         this.#fireStarter();
     } else {
-        console.log('Initializer');
+        // console.log('Initializer');
         this.#initialize();
     }
 
@@ -1177,7 +1205,7 @@ resizeFire(width,height){
 }
 
 
-// let matrixEffect2 = new Effect2(secondCanvas.width, secondCanvas.height);
+let matrixEffect2 = new Effect2(secondCanvas.width, secondCanvas.height);
 
 let lastTime2 = 0;
 const fps2 = 15;
