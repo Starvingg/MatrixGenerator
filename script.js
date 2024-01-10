@@ -792,7 +792,7 @@ document.addEventListener('dblclick', function() {
 // The below keeps hidden canvas same size as .glass.
 // For some reason I had to use Classes and IDs.
 
-window.addEventListener('DOMContentLoaded', (event) => { 
+window.onload = function() {
     const glassDiv = document.querySelector('.glass');
     const hiddenCanvasDiv = document.getElementById('hiddenCanvasDiv');
 
@@ -802,7 +802,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         // Update the height on window resize
         hiddenCanvasDiv.style.height = getComputedStyle(glassDiv).height;
     });
-});
+};
 
 
 

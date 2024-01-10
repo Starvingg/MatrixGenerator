@@ -43,7 +43,6 @@ body{
 .glassCanvasContainer {
     display: flex;
     flex-direction: column;
-
 }
 
 #fullscreenBtn, #hideBtn {
