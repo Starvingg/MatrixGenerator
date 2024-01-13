@@ -116,9 +116,6 @@ body{
     display: none;
 }
 
-
-
-
 .glass {
     background: rgba(255, 255, 255, 0.1); /* Adjust the alpha value for transparency */
     backdrop-filter: blur(10px); /* Adjust the blur amount */
@@ -146,8 +143,6 @@ body{
     box-shadow: 0 0 0 rgba(0, 0, 0, 0); /* Default box-shadow */
     transition: box-shadow 5.5s ease-in-out; /* Shorter transition duration */
 }
-
-
 
 #glassTitle {
     margin-top: 0px;

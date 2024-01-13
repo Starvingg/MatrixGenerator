@@ -478,8 +478,6 @@ const randomEffectIndex = Math.floor(Math.random() * effectsToStart.length);
 effectsToStart[randomEffectIndex]();
 
 
-
-
 // Mouse Clicks for buttons start different Matrix Effect
 
 // Classic Effects Buttons
