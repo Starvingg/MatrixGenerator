@@ -11,6 +11,8 @@
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
+
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -442,7 +444,16 @@ window.addEventListener('resize',function(){
 // FRONT END STUFF STARTS HERE
 // ---------------------------
 
-// This randomly selects an initial effect to start
+// This selects a random effect to initially start
+
+let isOnMobile = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.innerWidth <= 1100) {
+        isOnMobile = true;
+    }
+});
+
 
 const effectsToStart = [
     function() {
@@ -509,7 +520,7 @@ document.getElementById('btnPurpleThunder').addEventListener('click', function()
     startEffect('red','purpleThunder');
 });
 
-document.getElementsByClassName('btnCheckerBoard')[0].addEventListener('click', function() {
+document.getElementById('btnCheckerBoard').addEventListener('click', function() {
     startEffect('red','checkered');
 });
 
@@ -528,15 +539,16 @@ document.getElementById('btnChess').addEventListener('click', function() {
 
 // Classic Effects - Hover over
 // ---
-document.getElementById('btnMovieGreen').addEventListener('mouseover', function() {
-    const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    glass.classList.add('movieGreenHoverEffect');
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('btnMovieGreen').addEventListener('mouseover', function() {
+        const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
+        glass.classList.add('movieGreenHoverEffect');
 
-    const fullScreenBtn = document.getElementById('fullscreenBtn');
-    const hideBtn = document.getElementById('hideBtn');
-    fullScreenBtn.style.display = "none";
-    hideBtn.style.display = "none";
-
+        const fullScreenBtn = document.getElementById('fullscreenBtn');
+        const hideBtn = document.getElementById('hideBtn');
+        fullScreenBtn.style.display = "none";
+        hideBtn.style.display = "none";
+    });
 });
   
 document.getElementById('btnMovieGreen').addEventListener('mouseout', function() {
@@ -640,23 +652,27 @@ document.getElementById('btnPurpleThunder').addEventListener('mouseover', functi
     isCanvas2Animating = true;
     startEffect2('red','purpleThunder');
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.add('purpleRainHoverEffect');
+    
+    // Hides the close and full screen buttons.
 
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
     fullScreenBtn.style.display = "none";
     hideBtn.style.display = "none";
+
 });
   
 document.getElementById('btnPurpleThunder').addEventListener('mouseout', function() {
     isCanvas2Animating = false;
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.remove('purpleRainHoverEffect');
+
+    // Hides the close and full screen buttons.
 
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
     fullScreenBtn.style.display = "";
     hideBtn.style.display = "";
+
 });
 
 
@@ -685,22 +701,20 @@ document.getElementById('btnPurpleThunder').addEventListener('mouseout', functio
 });
 
 // ---
-document.getElementsByClassName('btnCheckerBoard')[0].addEventListener('mouseover', function() {
+document.getElementById('btnCheckerBoard').addEventListener('mouseover', function() {
     isCanvas2Animating = true;
     startEffect2('red','checkered');
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.add('purpleRainHoverEffect');
-
+    
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
     fullScreenBtn.style.display = "none";
     hideBtn.style.display = "none";
 });
   
-document.getElementsByClassName('btnCheckerBoard')[0].addEventListener('mouseout', function() {
+document.getElementById('btnCheckerBoard').addEventListener('mouseout', function() {
     isCanvas2Animating = false;
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.remove('purpleRainHoverEffect');
 
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
@@ -713,8 +727,7 @@ document.getElementById('btnCozyFire').addEventListener('mouseover', function() 
     isCanvas2Animating = true;
     startEffect2('red','cozyFire');
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.add('purpleRainHoverEffect');
-
+    
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
     fullScreenBtn.style.display = "none";
@@ -724,7 +737,6 @@ document.getElementById('btnCozyFire').addEventListener('mouseover', function() 
 document.getElementById('btnCozyFire').addEventListener('mouseout', function() {
     isCanvas2Animating = false;
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.remove('purpleRainHoverEffect');
 
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
@@ -737,8 +749,7 @@ document.getElementById('btnChess').addEventListener('mouseover', function() {
     isCanvas2Animating = true;
     startEffect2('red','chess');
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.add('purpleRainHoverEffect');
-
+    
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
     fullScreenBtn.style.display = "none";
@@ -748,7 +759,6 @@ document.getElementById('btnChess').addEventListener('mouseover', function() {
 document.getElementById('btnChess').addEventListener('mouseout', function() {
     isCanvas2Animating = false;
     const glass = document.getElementsByClassName('hiddenCanvasDiv')[0]; // Access the first element in the collection
-    //glass.classList.remove('purpleRainHoverEffect');
 
     const fullScreenBtn = document.getElementById('fullscreenBtn');
     const hideBtn = document.getElementById('hideBtn');
@@ -839,9 +849,6 @@ window.onload = function() {
         hiddenCanvasDiv.style.height = getComputedStyle(glassDiv).height;
     });
 };
-
-
-
 
 
 
@@ -1276,11 +1283,10 @@ function startEffect2(color,style){
 
 
 window.addEventListener('resize',function(){
-    secondCanvas.width = window.innerWidth;
-    secondCanvas.height = window.innerHeight;
+    secondCanvas.width = document.getElementById('hiddenCanvas').offsetWidth;
+    secondCanvas.height = document.getElementById('hiddenCanvas').offsetHeight;
     matrixEffect2.resize(secondCanvas.width, secondCanvas.height);
 });
-
 
 
 // -----------------------------
