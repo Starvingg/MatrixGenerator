@@ -7,23 +7,35 @@
 // Initial inspiration and work from Franks Laboratory
 // https://www.youtube.com/watch?v=f5ZswIE_SgY
 
+//  ----------
+//  Canvas Initializers
+//  ----------
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
-
-
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let gradient = ctx.createLinearGradient(0,0,0,canvas.height);
 
-let cozyFireOn = false;
+// Event listener to resize main canvas 
+window.addEventListener('resize',function(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    matrixEffect.resize(canvas.width,canvas.height);
+});
 
+//  ----------
+//  Global Variables
+//  ----------
+
+let globalFontSize = 25;
 
 class Symbol{ // Manages individual symbols
 
     constructor(x,y, fontSize, canvasHeight, color, style){
+
         this.characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         this.chessChars = '♔♕♖♗♘♙♗♗♗♗♗♗♗♗♘♙♖♚♛♜♝♞♟︎♝♝♝♝♝♝♝♞♟︎♜          ';
 
@@ -65,8 +77,7 @@ class Symbol{ // Manages individual symbols
         }
         //console.log("solidColor: OK")
 
-        }
-        else if (this.style === 'purpleThunder'){
+        } else if (this.style === 'purpleThunder'){
 
             if(Math.random()>.90){
                 context.fillStyle = 'magenta'; // This is a square that "clears" the canvas
@@ -144,7 +155,6 @@ class Symbol{ // Manages individual symbols
             context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 450, this.fontSize, this.fontSize);
 
         } else if (this.style === 'cozyFire'){
-            cozyFireOn = true;
 
             if(Math.random()>.92){ // Draw Majority of the fire on the bottom
 
@@ -196,39 +206,7 @@ class Symbol{ // Manages individual symbols
                     
                 }
 
-
-            // if(Math.random()>.9987){
-
-            //     let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            //     gradient.addColorStop(1, 'rgba(255, 124, 0, 0.025)');
-            //     gradient.addColorStop(.76, 'rgba(246, 131, 7, 0.025)'); 
-            //     gradient.addColorStop(.33, 'rgba(236, 25, 15, 0.025)'); 
-            //     gradient.addColorStop(0, 'rgba(0, 0, 0, 0.025)'); 
-            //     ctx.fillStyle = gradient;
-            //     ctx.fillRect(0,0,canvas.width, canvas.height);
-                  
-            // } else if (Math.random() > .9995) {
-            //     let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            //     gradient.addColorStop(1, 'rgba(255, 124, 0, 0.055)');
-            //     gradient.addColorStop(.76, 'rgba(246, 131, 7, 0.055)'); 
-            //     gradient.addColorStop(.33, 'rgba(236, 25, 15, 0.055)'); 
-            //     gradient.addColorStop(0, 'rgba(0, 0, 0, 0.025)'); 
-            //     ctx.fillStyle = gradient;
-            //     ctx.fillRect(0,0,canvas.width, canvas.height);
-
-            //     let gt = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            //     gt.addColorStop(1, 'rgba(255, 124, 0, 0.055)');
-            //     gt.addColorStop(.76, 'rgba(246, 131, 7, 0.055)'); 
-            //     gt.addColorStop(.33, 'rgba(236, 25, 15, 0.055)'); 
-            //     gt.addColorStop(0, 'rgba(0, 0, 0, 0.025)'); 
-            //     ctx.fillStyle = gt;
-            //     ctx.fillRect(0,0,canvas.width, canvas.height);
-
-
-            // }
-
-        }
-        else if (this.style === 'chess'){
+        } else if (this.style === 'chess'){
 
         
 
@@ -293,7 +271,7 @@ class Symbol{ // Manages individual symbols
         // context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 950, this.fontSize, this.fontSize);
     
         }
-        
+
     }
 
 }
@@ -335,7 +313,7 @@ class Effect{ // Main wrapper, we use this to create, update, and draw all symbo
         }
     }
 
-    #initialize(){ // Private methods cannot be called from outside
+    #initialize(){
         for(let i=0; i < this.columns; i++){
             this.symbols[i] = new Symbol(i, this.canvasHeight/Math.random(), this.fontSize, this.canvasHeight, this.color, this.style);
         }
@@ -360,7 +338,7 @@ class Effect{ // Main wrapper, we use this to create, update, and draw all symbo
 }
 
 
-let matrixEffect;
+
 
 let lastTime = 0;
 const fps = 24;
@@ -369,34 +347,11 @@ let timer = 0;
 
 let runCounter = 0;
 
-let hsl = 0;
-
 function animate(timeStamp){ // Draws the effect over and over. (Still not sure on exact implementation)
     // timeStamp is automatically passed by the requestAnimationFrame method
 
     const deltaTime = timeStamp-lastTime;
     lastTime = timeStamp;
-
-    // if(timer > nextFrame && cozyFireOn){
-    //     ctx.fillStyle = 'rgba(0,0,0,.125)';
-    //     ctx.fillRect(0,0,canvas.width, canvas.height);
-        
-    //     // let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    //     // gradient.addColorStop(1, 'rgba(255, 100, 11, 0.125)');
-    //     // gradient.addColorStop(0, 'rgba(0, 0, 0, 0.125)');
-    //     // ctx.fillStyle = gradient;
-    //     // ctx.fillRect(0,0,canvas.width, canvas.height);
-
-
-
-    //     ctx.textAlign = 'center';
-    //     ctx.font = matrixEffect.fontSize + 'px monospace';
-
-    //     matrixEffect.symbols.forEach(symbol => symbol.draw(ctx));
-    //     timer = 0;
-    // } else {
-    //     timer += deltaTime;
-    // }
 
     if(timer > nextFrame){
         ctx.fillStyle = 'rgba(0,0,0,.125)';
@@ -414,8 +369,9 @@ function animate(timeStamp){ // Draws the effect over and over. (Still not sure 
 }
 
 
-
 let animationId = null;
+
+let matrixEffect;
 
 function startEffect(color,style){
 
@@ -427,33 +383,12 @@ function startEffect(color,style){
     animationId = requestAnimationFrame(animate);
 };
 
-
-window.addEventListener('resize',function(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    if(cozyFireOn){
-        matrixEffect.resizeFire(canvas.width,canvas.height);
-        // console.log("CozyFireON");
-    } else {
-        matrixEffect.resize(canvas.width,canvas.height);
-    }
-});
-
 // ---------------------------
-// FRONT END STUFF STARTS HERE
+// ---------------------------
+// FRONT END Interface starts here
 // ---------------------------
 
 // This selects a random effect to initially start
-
-let isOnMobile = false;
-
-document.addEventListener('DOMContentLoaded', function() {
-    if (window.innerWidth <= 1100) {
-        isOnMobile = true;
-    }
-});
-
 
 const effectsToStart = [
     function() {
@@ -490,7 +425,6 @@ effectsToStart[randomEffectIndex]();
 
 
 // Mouse Clicks for buttons start different Matrix Effect
-
 // Classic Effects Buttons
 
 document.getElementById('btnMovieGreen').addEventListener('click', function() {
@@ -531,9 +465,6 @@ document.getElementById('btnCozyFire').addEventListener('click', function() {
 document.getElementById('btnChess').addEventListener('click', function() {
     startEffect('red','chess');
 });
-
-
-
 
 // Mouse hover effects for hiddenDiv
 
@@ -834,8 +765,6 @@ document.addEventListener('dblclick', function() {
 });
 
   
-
-  
 // The below keeps hidden canvas same size as .glass.
 // For some reason I had to use Classes and IDs.
 
@@ -883,7 +812,6 @@ class Symbol2{ // Manages individual symbols
 
         this.symbol; // This will represent the symbol. Characters, square, or what you decide to draw
         this.secondCanvasHeight = secondCanvasHeight;
-
     }
 
             /* --- Theme colors ---
@@ -911,10 +839,8 @@ class Symbol2{ // Manages individual symbols
         } else {
             this.y += 1;
         }
-        // console.log("solidColor: OK")
 
-        }
-        else if (this.style === 'purpleThunder'){
+        } else if (this.style === 'purpleThunder'){
 
             if(Math.random()>.90){
                 context.fillStyle = 'magenta'; // This is a square that "clears" the canvas
@@ -992,7 +918,6 @@ class Symbol2{ // Manages individual symbols
             context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 450, this.fontSize, this.fontSize);
 
         } else if (this.style === 'cozyFire'){
-            cozyFireOn = true;
 
             if(Math.random()>.92){ // Draw Majority of the fire on the bottom
 
@@ -1043,42 +968,7 @@ class Symbol2{ // Manages individual symbols
                 }
                     
                 }
-
-
-            // if(Math.random()>.9987){
-
-            //     let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            //     gradient.addColorStop(1, 'rgba(255, 124, 0, 0.025)');
-            //     gradient.addColorStop(.76, 'rgba(246, 131, 7, 0.025)'); 
-            //     gradient.addColorStop(.33, 'rgba(236, 25, 15, 0.025)'); 
-            //     gradient.addColorStop(0, 'rgba(0, 0, 0, 0.025)'); 
-            //     ctx.fillStyle = gradient;
-            //     ctx.fillRect(0,0,canvas.width, canvas.height);
-                  
-            // } else if (Math.random() > .9995) {
-            //     let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            //     gradient.addColorStop(1, 'rgba(255, 124, 0, 0.055)');
-            //     gradient.addColorStop(.76, 'rgba(246, 131, 7, 0.055)'); 
-            //     gradient.addColorStop(.33, 'rgba(236, 25, 15, 0.055)'); 
-            //     gradient.addColorStop(0, 'rgba(0, 0, 0, 0.025)'); 
-            //     ctx.fillStyle = gradient;
-            //     ctx.fillRect(0,0,canvas.width, canvas.height);
-
-            //     let gt = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            //     gt.addColorStop(1, 'rgba(255, 124, 0, 0.055)');
-            //     gt.addColorStop(.76, 'rgba(246, 131, 7, 0.055)'); 
-            //     gt.addColorStop(.33, 'rgba(236, 25, 15, 0.055)'); 
-            //     gt.addColorStop(0, 'rgba(0, 0, 0, 0.025)'); 
-            //     ctx.fillStyle = gt;
-            //     ctx.fillRect(0,0,canvas.width, canvas.height);
-
-
-            // }
-
-        }
-        else if (this.style === 'chess'){
-
-        
+        } else if (this.style === 'chess'){
 
         if(Math.random()>.9601){
 
@@ -1096,8 +986,6 @@ class Symbol2{ // Manages individual symbols
                 this.y += 1;
             }
         } 
-
-
 
         this.fontSize = 90;
 
@@ -1185,7 +1073,7 @@ constructor(secondCanvasWidth, secondCanvasHeight, color, style){
     }
 }
 
-#initialize(){ // Private methods cannot be called from outside
+#initialize(){
     for(let i=0; i < this.columns; i++){
         this.symbols[i] = new Symbol(i, this.secondCanvasHeight/Math.random(), this.fontSize, this.secondCanvasHeight, this.color, this.style);
     }
@@ -1226,27 +1114,6 @@ function animate2(timeStamp){ // Draws the effect over and over. (Still not sure
 
     const deltaTime = timeStamp-lastTime2;
     lastTime = timeStamp;
-
-    // if(timer > nextFrame && cozyFireOn){
-    //     ctx.fillStyle = 'rgba(0,0,0,.125)';
-    //     ctx.fillRect(0,0,canvas.width, canvas.height);
-        
-    //     // let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    //     // gradient.addColorStop(1, 'rgba(255, 100, 11, 0.125)');
-    //     // gradient.addColorStop(0, 'rgba(0, 0, 0, 0.125)');
-    //     // ctx.fillStyle = gradient;
-    //     // ctx.fillRect(0,0,canvas.width, canvas.height);
-
-
-
-    //     ctx.textAlign = 'center';
-    //     ctx.font = matrixEffect.fontSize + 'px monospace';
-
-    //     matrixEffect.symbols.forEach(symbol => symbol.draw(ctx));
-    //     timer = 0;
-    // } else {
-    //     timer += deltaTime;
-    // }
 
     if(timer2 > nextFrame2){
 
@@ -1293,137 +1160,5 @@ window.addEventListener('resize',function(){
 // -----------------------------
 // -----------------------------
 
-
-// /* Back Up Second Canvas */
-
-
-// const secondCanvas = document.getElementById('hiddenCanvas');
-// const cvs = secondCanvas.getContext('2d');
-
-// secondCanvas.width = document.getElementById('hiddenCanvas').offsetWidth;
-// secondCanvas.height = document.getElementById('hiddenCanvas').offsetHeight;
-// // secondCanvas.height = divHeight;
-
-// class Symbol2{ // Manages individual symbols
-
-//     constructor(x,y, fontSize, secondCanvasHeight){
-//         this.characters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-//         this.x = x;
-//         this.y = y;
-//         this.fontSize = fontSize;
-
-//         this.text = '';
-//         this.secondCanvasHeight = secondCanvasHeight;
-
-//     }
-    
-//     draw(context){ // Individual symbols have access to this. (context) argument specifies which secondCanvas to draw on
-//         this.text = this.characters.charAt(Math.floor(Math.random()*this.characters.length));
-
-//         context.fillStyle = 'red'; // Controls font color
-//         context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
-
-//         context.fillStyle = 'rgba(0,0,0,.75)';
-//         context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 750, this.fontSize+5, this.fontSize+5);
-
-//         context.fillStyle = 'rgba(250,250,250,1)';
-//         context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 950, this.fontSize+5, this.fontSize+5);
-
-//         if(this.y * this.fontSize > this.secondCanvasHeight && Math.random() > 0.97){
-//             this.y = 0;
-//         } else {
-//             this.y += 1;
-//         }
-
-
-//         /* --- Theme colors ---
-//         Movie Green: rgb(10, 251, 14)
-//         Blue Machine: rgb(0,140,255)
-//         Red Vibes: rgb(255, 0, 0)
-
-//         */
-
-//     }
-
-// }
-
-
-
-// class Effect2{ // Main wrapper, we use this to create, update, and draw all symbols
-// // Must be aware of secondCanvas size
-//     constructor(secondCanvasWidth, secondCanvasHeight){
-//         this.secondCanvasWidth = secondCanvasWidth;
-//         this.secondCanvasHeight = secondCanvasHeight;
-
-//         this.fontSize = 25;
-//         this.columns = this.secondCanvasWidth/this.fontSize;
-//         this.symbols = [];
-
-//         console.log(this.symbols);
-//         this.#initialize();
-//     }
-
-//     #initialize(){ // Private methods cannot be called from outside
-//         for(let i=0; i < this.columns; i++){
-//             this.symbols[i] = new Symbol2(i, this.secondCanvasHeight/Math.random(), this.fontSize, this.secondCanvasHeight);
-//         }
-//     }
-
-//     resize(width,height){
-//         this.secondCanvasWidth = width;
-//         this.secondCanvasHeight = height;
-//         this.columns = this.secondCanvasWidth/this.fontSize;
-//         this.symbols = [];
-//         this.#initialize();
-//     }
-
-// }
-
-
-// const matrixEffect2 = new Effect2(secondCanvas.width, secondCanvas.height);
-
-// let lastTime2 = 0;
-// const fps2 = 24;
-// const nextFrame2 = 1000/fps2
-// let timer2 = 0;
-
-// let runCounter2 = 0;
-
-// let isCanvas2Animating = false;
-
-// function animate2(timeStamp){ // Draws the effect over and over. (Still not sure on exact implementation)
-//     // timeStamp is automatically passed by the requestAnimationFrame method
-
-//     if (!isCanvas2Animating){
-//         cvs.clearRect(0, 0, secondCanvas.width, secondCanvas.height);
-//         return;
-//     }
-
-//     const deltaTime = timeStamp-lastTime2;
-//     lastTime2 = timeStamp;
-
-//     if(timer2 > nextFrame2){
-//         cvs.fillStyle = 'rgba(0,0,0,.125)';
-//         cvs.textAlign = 'center';
-//         cvs.fillRect(0,0,secondCanvas.width,secondCanvas.height);
-//         cvs.font = matrixEffect2.fontSize + 'px monospace';
-
-//         matrixEffect2.symbols.forEach(symbol => symbol.draw(cvs));
-//         timer2 = 0;
-//     } else {
-//         timer2 += deltaTime;
-//     }
-
-//     requestAnimationFrame(animate2);
-// }
-
-// animate2(0);
-
-// window.addEventListener('resize',function(){
-//     secondCanvas.width = window.innerWidth;
-//     secondCanvas.height = window.innerHeight;
-//     matrixEffect2.resize(secondCanvas.width,canvas.height);
-// });
 
 
