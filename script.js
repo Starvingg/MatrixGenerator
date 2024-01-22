@@ -178,8 +178,6 @@ class Symbol{ // Manages individual symbols
                 }
 
             } else if (Math.random()>.85){
-
-
                 context.fillStyle = 'rgb(197, 197, 197)';
                 context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 425, this.fontSize, this.fontSize);
 
@@ -188,9 +186,7 @@ class Symbol{ // Manages individual symbols
                 } else {
                     this.y -= 1;
                 }
-            }
-            
-            
+            }            
             else {
 
                 if(Math.random()>.685){
@@ -204,7 +200,7 @@ class Symbol{ // Manages individual symbols
                     }
                 }
                     
-                }
+            }
 
         } else if (this.style === 'chess'){
 
@@ -271,9 +267,7 @@ class Symbol{ // Manages individual symbols
         // context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 950, this.fontSize, this.fontSize);
     
         }
-
     }
-
 }
 
 class Effect{ // Main wrapper, we use this to create, update, and draw all symbols
@@ -338,8 +332,6 @@ class Effect{ // Main wrapper, we use this to create, update, and draw all symbo
 }
 
 
-
-
 let lastTime = 0;
 const fps = 24;
 const nextFrame = 1000/fps
@@ -348,8 +340,9 @@ let timer = 0;
 let runCounter = 0;
 
 function animate(timeStamp){ // Draws the effect over and over. (Still not sure on exact implementation)
-    // timeStamp is automatically passed by the requestAnimationFrame method
 
+    // timeStamp parameter is passed in automatically by the requestAnimationFrame method when invoked
+    
     const deltaTime = timeStamp-lastTime;
     lastTime = timeStamp;
 
@@ -364,7 +357,7 @@ function animate(timeStamp){ // Draws the effect over and over. (Still not sure 
     } else {
         timer += deltaTime;
     }
-
+    // the animate function is then called recursively with the requestAnimationFrame method
     requestAnimationFrame(animate);
 }
 
@@ -373,14 +366,22 @@ let animationId = null;
 
 let matrixEffect;
 
+// This function initiates the loop for the animation function
+// First it checks if there is an animation running
+    // If there is an animation running it cancels it, and starts a new animation with the parameters provided
+// The loop then continues in the animate function.
+
 function startEffect(color,style){
 
     if(animationId !== null){
         cancelAnimationFrame(animationId);
     }
+    console.log("Before Call",animationId);
 
     matrixEffect = new Effect(canvas.width, canvas.height,color,style);
     animationId = requestAnimationFrame(animate);
+    
+    console.log("After Call",animationId);
 };
 
 // ---------------------------
@@ -410,13 +411,13 @@ const effectsToStart = [
         startEffect('red','purpleThunder'); // Purple Thunder
     },
     function(){
-        startEffect('red','checkered');
+        startEffect('red','checkered'); // Checkered
     },
     function(){
-        startEffect('red','cozyFire');
+        startEffect('red','cozyFire'); // Cozy Fire
     },
     function(){
-        startEffect('red','chess');
+        startEffect('red','chess'); // Chess
     }
 ];
 
