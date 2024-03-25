@@ -435,8 +435,6 @@ effectsToStart[randomEffectIndex]();
 // eventListeners.js Allows Hidden Canvas to be same size as .glass
 
 
-
-
 // -----------------------------
 // -----------------------------
 // -----------------------------
@@ -676,19 +674,11 @@ class Symbol2{ // Manages individual symbols
             this.y += 1;
         }
 
-        // context.fillStyle = 'rgba(0,0,0,.75)'; // This is a square that "clears" the canvas
-        // context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 750, this.fontSize, this.fontSize);
-
-        // context.fillStyle = 'rgba(0,0,0,1)'; // This is a square that "clears" the canvas
-        // context.fillRect((this.x * this.fontSize) - this.fontSize / 2, (this.y * this.fontSize) - this.fontSize / 2 - 950, this.fontSize, this.fontSize);
-    
         }
         
     }
 
 }
-
-
 
 class Effect2{ // Main wrapper, we use this to create, update, and draw all symbols
 // Must be aware of canvas size
